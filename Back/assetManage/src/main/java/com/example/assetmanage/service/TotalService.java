@@ -50,7 +50,7 @@ public class TotalService {
     }
 
     public List<TotalVO> getAll(){
-        return totalMapper.selectList(new QueryWrapper<Total>().orderByDesc("date")).stream().map(this::tranferToTotalVO)
+        return totalMapper.selectList(new QueryWrapper<Total>().orderByAsc("date")).stream().map(this::tranferToTotalVO)
                 .collect(Collectors.toList());
     }
 

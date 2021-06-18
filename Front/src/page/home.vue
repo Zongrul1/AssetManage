@@ -39,8 +39,8 @@
 				this.value.push(res.value)
 				this.date.push(res.date)
 			});
-			document.getElementById("value").innerHTML=response.data.data[0].value;
-			document.getElementById("date").innerHTML=response.data.data[0].date;
+			document.getElementById("value").innerHTML=response.data.data[response.data.data.length - 1].value;
+			document.getElementById("date").innerHTML=response.data.data[response.data.data.length - 1].date;
 		})
 		.catch((error) => {
 			console.log(error);

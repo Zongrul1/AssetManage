@@ -25,6 +25,9 @@
             initData(){
                 const colors = ['#5793f3'];
                 const option = {
+        tooltip: {
+            trigger: 'axis'
+        },
         xAxis: {
             type: 'category',
             data: this.date,
