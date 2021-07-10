@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,13 +71,16 @@ public class TotalService {
         }
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        f.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         Total total = new Total(value,date);
+        System.out.println("现在的日期是:" + f.format(date));
         if(totalMapper.selectCount(new QueryWrapper<Total>().eq("date",f.format(date))) == 0){
             totalMapper.insert(total);
         }
         else{
             total = totalMapper.selectOne(new QueryWrapper<Total>().eq("date",f.format(date)));
             total.setValue(value);
+            System.out.println("现在的价值是：" + value);
             totalMapper.updateById(total);
         }
 
