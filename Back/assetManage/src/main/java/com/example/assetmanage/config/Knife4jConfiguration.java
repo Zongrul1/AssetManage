@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @Configuration
 @EnableSwagger2WebMvc
-@Profile(value = {"dev"})
+@Profile(value = {"dev","prod"})
 public class Knife4jConfiguration {
 
     @Bean("v1")
