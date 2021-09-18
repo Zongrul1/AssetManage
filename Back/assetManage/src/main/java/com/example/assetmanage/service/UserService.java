@@ -92,9 +92,9 @@ public class UserService {
      * 验证用户合法性
      * @param account
      * @param password
-     * @return {@link String}
+     * @return {@link Boolean}
      */
-    public String verify(String account,String password){
+    public Boolean verify(String account,String password){
         // 验证sha256
         String passwordEncrypt = DigestUtils.sha256Hex(password);
 
@@ -102,10 +102,10 @@ public class UserService {
                 .eq("password",passwordEncrypt));
 
         if (count == 0) {
-            return "验证失败";
+            return false;
         }
 
-        return "验证成功";
+        return true;
     }
 
 }

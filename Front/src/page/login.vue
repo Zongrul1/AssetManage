@@ -3,7 +3,7 @@
 	  	<transition name="form-fade" mode="in-out">
 	  		<section class="form_contianer" v-show="showLogin">
 		  		<div class="manage_tip">
-		  			<p>财务管理系统</p>
+		  			<p>测试</p>
 		  		</div>
 		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
 					<el-form-item prop="username">
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+    const axios = require('axios');
+
 	export default {
 	    data(){
 			return {
@@ -42,10 +44,17 @@
 		},
 		methods: {
 			submitForm() {
-                console.log(this.loginForm.username)
-                if(this.loginForm.username == "admin" & this.loginForm.password == "admin"){
-					this.$router.push('manage')
-                }
+                axios.get("http://localhost:10088/user/verify", {
+                    params:{
+                        account: this.loginForm.username,
+                        password: this.loginForm.password,
+                    }
+                }).then(result=>{
+                        if(result.data.data){
+                            this.$router.push('manage');
+                        }
+                });
+
             }
         }
 	}

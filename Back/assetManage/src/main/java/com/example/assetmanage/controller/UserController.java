@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 @Api(tags = "用户模块")
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin()
 public class UserController {
     private final UserService userService;
 
@@ -35,18 +35,18 @@ public class UserController {
         return R.successed(userService.update(user));
     }
 
-    @DeleteMapping("/delete")
-    public R<String> delete(String id){
+    @DeleteMapping("/delete/{id}")
+    public R<String> delete(@PathVariable String id){
         return R.successed(userService.delete(id));
     }
 
-    @DeleteMapping("hidden-delete")
-    public R<String> hiddenDelete(String id){
+    @DeleteMapping("hidden-delete/{id}")
+    public R<String> hiddenDelete(@PathVariable String id){
         return R.successed(userService.hiddenDelete(id));
     }
 
     @GetMapping("/verify")
-    public R<String> verify(String account,String password){
+    public R<Boolean> verify(String account,String password){
         return R.successed(userService.verify(account, password));
     }
 }
