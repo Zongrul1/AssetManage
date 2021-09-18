@@ -74,3 +74,17 @@ CREATE TABLE `total`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+                        `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+                        `account` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
+                        `password` varchar(255) NOT NULL COMMENT '密码',
+                        `birthday` date DEFAULT NULL COMMENT '生日',
+                        `create_time` datetime NOT NULL COMMENT '创建时间',
+                        `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未删除 1删除',
+                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1437345532696129538 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
