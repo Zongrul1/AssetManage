@@ -18,7 +18,7 @@
 
 <script>
     const axios = require('axios');
-	import tendency from '../components/tendency' 
+	import tendency from '../components/tendency'
     export default {
 	data() {
 		return {
@@ -32,7 +32,7 @@
     		tendency,
     	},
 	created () {
-		axios.get('http://localhost:9000/total/get-all')
+		axios.get('http://localhost:10088/total/get-all')
 		.then((response) => {
 			var res = response.data.data;
 			res.forEach(res => {

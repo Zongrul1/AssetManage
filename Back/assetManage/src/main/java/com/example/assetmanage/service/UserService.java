@@ -6,9 +6,11 @@ import com.example.assetmanage.model.User;
 import lombok.AllArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户service
@@ -85,27 +87,6 @@ public class UserService {
         user.setDeleted(1);
         update(user);
         return id;
-    }
-
-    /**
-     * todo
-     * 验证用户合法性
-     * @param account
-     * @param password
-     * @return {@link Boolean}
-     */
-    public Boolean verify(String account,String password){
-        // 验证sha256
-        String passwordEncrypt = DigestUtils.sha256Hex(password);
-
-        int count = userMapper.selectCount(new QueryWrapper<User>().eq("account",account)
-                .eq("password",passwordEncrypt));
-
-        if (count == 0) {
-            return false;
-        }
-
-        return true;
     }
 
 }

@@ -20,6 +20,7 @@ const routes = [
 		path: '/manage',
 		component: manage,
 		name: '',
+        meta:{loginRequest:true},
 		children: [{
 			path: '/manage',
 			component: home,
@@ -46,6 +47,7 @@ const routes = [
 ]
 
 export default new Router({
+    mode: "history",
 	routes,
 	strict: process.env.NODE_ENV !== 'production',
 })

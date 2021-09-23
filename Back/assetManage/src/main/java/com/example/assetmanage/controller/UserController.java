@@ -44,9 +44,4 @@ public class UserController {
     public R<String> hiddenDelete(@PathVariable String id){
         return R.successed(userService.hiddenDelete(id));
     }
-
-    @GetMapping("/verify")
-    public R<Boolean> verify(String account,String password){
-        return R.successed(userService.verify(account, password));
-    }
 }

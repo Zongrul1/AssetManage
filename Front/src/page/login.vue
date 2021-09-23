@@ -44,14 +44,17 @@
 		},
 		methods: {
 			submitForm() {
-                axios.get("http://localhost:10088/user/verify", {
-                    params:{
-                        account: this.loginForm.username,
-                        password: this.loginForm.password,
-                    }
-                }).then(result=>{
-                        if(result.data.data){
+			    let data = new FormData();
+			    data.append("account",this.loginForm.username);
+			    data.append("password",this.loginForm.password);
+
+                axios.post("http://localhost:10088/login/verify", data)
+                    .then(result=>{
+                        if(result.data.data != null){
+                            window.sessionStorage.setItem("token",result.data.data);
                             this.$router.push('manage');
+                        }else{
+
                         }
                 });
 

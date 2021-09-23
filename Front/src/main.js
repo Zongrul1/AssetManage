@@ -12,6 +12,30 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 
+// kg： 跨域保存cookie/session
+Axios.defaults.withCredentials = true;
+
+router.beforeEach((to, from, next)=>{
+    console.log(to.meta);
+    if(to.meta.loginRequest){
+        console.log('aaaaaaa');
+        console.log(sessionStorage.getItem("token"));
+        if(sessionStorage.getItem("token")){
+
+            next();
+        }else{
+            console.log('cccccc');
+            next({
+                path: '/',
+                // query:{redirect: to.fullPath}
+            });
+        }
+    }else{
+        console.log('dddddddd');
+        next();
+    }
+});
+
 new Vue({
 	el: '#app',
 	router,
