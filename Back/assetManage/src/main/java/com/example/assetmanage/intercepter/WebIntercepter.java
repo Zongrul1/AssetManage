@@ -1,6 +1,6 @@
 package com.example.assetmanage.intercepter;
 
-import com.example.assetmanage.untils.TokenCache;
+import com.example.assetmanage.utils.TokenCache;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

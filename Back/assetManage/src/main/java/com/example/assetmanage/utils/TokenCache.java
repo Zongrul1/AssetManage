@@ -1,4 +1,4 @@
-package com.example.assetmanage.untils;
+package com.example.assetmanage.utils;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class TokenCache {
         return map.get(userId);
     }
 
-    @Scheduled(fixedRate = 1000 * 20)
+    @Scheduled(fixedRate = 1000 * 2)
     public static void clearFirst() {
         System.out.println("执行了定时");
         if (!map.isEmpty()) {
