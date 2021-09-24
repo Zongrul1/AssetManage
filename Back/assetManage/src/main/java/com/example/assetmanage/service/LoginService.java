@@ -23,9 +23,9 @@ public class LoginService {
 
     /**
      * 验证用户合法性
-     * @param account
-     * @param password
-     * @return {@link Boolean}
+     * @param account 账户
+     * @param password 密码
+     * @return {@link String} token
      */
     public String verify(String account, String password, HttpServletRequest request) {
         // 验证sha256
@@ -48,6 +48,7 @@ public class LoginService {
 
         request.getSession().setAttribute("userId",user.getId());
         request.getSession().setAttribute("token",token);
+        request.getSession().setAttribute("isLogin",true);
 
 
         return token;

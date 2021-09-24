@@ -22,7 +22,7 @@ public class TokenCache {
         return map.get(userId);
     }
 
-    @Scheduled(fixedRate = 1000 * 2)
+    @Scheduled(fixedRate = 1000 * 60 * 20)
     public static void clearFirst() {
         System.out.println("执行了定时");
         if (!map.isEmpty()) {

@@ -19,15 +19,23 @@ public class WebIntercepter implements HandlerInterceptor {
 
         String token = (String)request.getSession().getAttribute("token");
         String userId = (String) request.getSession().getAttribute("userId");
+        Boolean isLogin = (Boolean) request.getSession().getAttribute("isLogin");
 
         // session 过期 token 不存在
         if(token == null){
             return false;
         }
 
+        // 如果是登陆
+        if(isLogin != null && isLogin){
+            request.getSession().setAttribute("isLogin",false);
+            TokenCache.setToken(userId,token);
+            return true;
+        }
+
         String tokenResult = TokenCache.getToken(userId);
 
-        if(tokenResult == null || tokenResult.equals(token)){
+        if(tokenResult == null || !tokenResult.equals(token)){
             return false;
         }
 
