@@ -15,25 +15,19 @@ Vue.use(ElementUI);
 // kg： 跨域保存cookie/session
 Axios.defaults.withCredentials = true;
 
-router.beforeEach((to, from, next)=>{
-    console.log(to.meta);
-    if(to.meta.loginRequest){
-        console.log('aaaaaaa');
-        console.log(sessionStorage.getItem("token"));
-        if(sessionStorage.getItem("token")){
+router.beforeEach((to, from, next) => {
 
-            next();
-        }else{
-            console.log('cccccc');
-            next({
-                path: '/',
-                // query:{redirect: to.fullPath}
-            });
-        }
-    }else{
-        console.log('dddddddd');
+    if (to.path == '/' || sessionStorage.getItem("token")) {
+        // 进入
         next();
+    } else {
+        next({
+            // 跳回主界面、 登录界面
+            path:'/',
+
+        });
     }
+
 });
 
 new Vue({

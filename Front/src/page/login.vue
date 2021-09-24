@@ -1,25 +1,40 @@
 <template>
-  	<div class="login_page fillcontain">
-	  	<transition name="form-fade" mode="in-out">
-	  		<section class="form_contianer" v-show="showLogin">
-		  		<div class="manage_tip">
-		  			<p>测试</p>
-		  		</div>
-		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
-					<el-form-item prop="username">
-						<el-input v-model="loginForm.username" placeholder="用户名"><span></span></el-input>
-					</el-form-item>
-					<el-form-item prop="password">
-						<el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
-					</el-form-item>
-					<el-form-item>
-				    	<el-button type="primary" @click="submitForm()" class="submit_btn">登录</el-button>
-				  	</el-form-item>
-				</el-form>
-	  		</section>
-	  	</transition>
-  	</div>
+    <div class="login_page fillcontain">
+        <transition name="form-fade" mode="in-out">
+            <div>
+                <section class="form_contianer" v-show="showLogin">
+                    <div class="manage_tip">
+                        <p>测试</p>
+                    </div>
+                    <el-form :model="loginForm" :rules="rules" ref="loginForm">
+                        <el-form-item prop="username">
+                            <el-input v-model="loginForm.username" placeholder="用户名"><span></span></el-input>
+                        </el-form-item>
+                        <el-form-item prop="password">
+                            <el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm()" class="submit_btn">登录</el-button>
+                        </el-form-item>
+                    </el-form>
+                </section>
+
+                <!--傻閪弹窗-->
+                <el-dialog class="myClass"
+                    title="提示"
+                    :visible="visible"
+                    width="20%"
+                    :before-close="close">
+                    <span>账号密码错误！</span>
+                    <span slot="footer" class="dialog-footer">
+                        <el-button type="primary" @click="visible = false">确 定</el-button>
+                    </span>
+                </el-dialog>
+            </div>
+        </transition>
+    </div>
 </template>
+
 
 <script>
     const axios = require('axios');
@@ -40,7 +55,8 @@
 					],
 				},
 				showLogin: true,
-			}
+                visible:false,
+            }
 		},
 		methods: {
 			submitForm() {
@@ -54,17 +70,19 @@
                             window.sessionStorage.setItem("token",result.data.data);
                             this.$router.push('manage');
                         }else{
-
+                            this.visible = true;
                         }
                 });
-
+            },
+            close(){
+                this.visible = false;
             }
         }
 	}
 </script>
 
 <style lang="less" scoped>
-	@import '../style/mixin';
+    @import '../style/mixin';
 	.login_page{
 		background-color: #324057;
 	}
@@ -101,4 +119,8 @@
 	  	transform: translate3d(0, -50px, 0);
 	  	opacity: 0;
 	}
+    .myClass{
+        .ctt;
+    }
+
 </style>
