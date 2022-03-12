@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "swagger.enable=true",
+      "type": "java.lang.String",
+      "description": "Description for swagger.enable=true."
+  }
+] }
