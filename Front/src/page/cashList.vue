@@ -100,14 +100,14 @@
       }
     },
     created () {
-        axios.get('http://localhost:9000/cash/get-all')
+        axios.get('http://localhost:10088/cash/get-all')
         .then((response) => {
            this.tableData = response.data.data
         })
         .catch((error) => {
             console.log(error);
         });
-        axios.get('http://localhost:9000/cash/get-value')        
+        axios.get('http://localhost:10088/cash/get-value')        
         .then((response) => {
            document.getElementById("v").innerHTML=response.data.data;
         })
@@ -125,7 +125,7 @@
       },
       handleDelete(id) {
         console.log(id)
-        var url = "http://localhost:9000/cash/delete/"
+        var url = "http://localhost:10088/cash/delete/"
         axios.get(url + id)
         window.location.reload()
       },
@@ -134,7 +134,7 @@
             timeout: 10000
         });
         request({
-          url:'http://localhost:9000/cash/update',
+          url:'http://localhost:10088/cash/update',
           method:'post',
           data:this.updateData//注意这里不需要转成json字符串，axios会自动识别该数据是form表单数据还是对象数据
       });
@@ -145,7 +145,7 @@
             timeout: 10000
         });
         request({
-          url:'http://localhost:9000/cash/add',
+          url:'http://localhost:10088/cash/add',
           method:'post',
           data:this.updateData//注意这里不需要转成json字符串，axios会自动识别该数据是form表单数据还是对象数据
       });

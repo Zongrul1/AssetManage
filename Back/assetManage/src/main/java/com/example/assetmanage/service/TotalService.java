@@ -2,19 +2,14 @@ package com.example.assetmanage.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.assetmanage.mapper.*;
-import com.example.assetmanage.model.Stock;
-import com.example.assetmanage.model.Total;
-import com.example.assetmanage.model.TotalVO;
+import com.example.assetmanage.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +19,8 @@ public class TotalService {
     CashMapper cashMapper;
     CoinMapper coinMapper;
     FundMapper fundMapper;
+    AlipayMapper alipayMapper;
+    WechatMapper wechatMapper;
 
     @Autowired
     public void setTotalMapper(TotalMapper totalMapper) {
@@ -36,18 +33,28 @@ public class TotalService {
     }
 
     @Autowired
-    public void setCashMapper(CoinMapper coinMapper) {
+    public void setCoinMapper(CoinMapper coinMapper) {
         this.coinMapper = coinMapper;
     }
 
     @Autowired
-    public void setCashMapper(FundMapper fundMapper) {
+    public void setFundMapper(FundMapper fundMapper) {
         this.fundMapper = fundMapper;
     }
 
     @Autowired
     public void setStockMapper(StockMapper stockMapper) {
         this.stockMapper = stockMapper;
+    }
+
+    @Autowired
+    public void setAlipayMapper(AlipayMapper alipayMapper) {
+        this.alipayMapper = alipayMapper;
+    }
+
+    @Autowired
+    public void setWechatMapper(WechatMapper wechatMapper) {
+        this.wechatMapper = wechatMapper;
     }
 
     public List<TotalVO> getAll(){
@@ -63,8 +70,11 @@ public class TotalService {
         if(coinMapper.selectCount(new QueryWrapper<>()) > 0){
             value += coinMapper.getValue();
         }
-        if(fundMapper.selectCount(new QueryWrapper<>()) > 0){
-            value += fundMapper.getValue();
+        if(alipayMapper.selectCount(new QueryWrapper<>()) > 0){
+            value += alipayMapper.getValue();
+        }
+        if(wechatMapper.selectCount(new QueryWrapper<>()) > 0){
+            value += wechatMapper.getValue();
         }
         if(cashMapper.selectCount(new QueryWrapper<>()) > 0){
             value += cashMapper.getValue();
@@ -85,6 +95,60 @@ public class TotalService {
         }
 
         return total;
+    }
+
+    public List<EachVO> getEach(){
+        List<EachVO> eachVOList = new LinkedList<>();
+        //处理股票对象
+        EachVO stock = new EachVO();
+        stock.setName("股票");
+        if(stockMapper.selectCount(new QueryWrapper<>()) > 0){
+            stock.setValue(stockMapper.getValue());
+        }
+        else {
+            stock.setValue(0);
+        }
+        eachVOList.add(stock);
+        //处理数字货币对象
+        EachVO coin = new EachVO();
+        coin.setName("数字货币");
+        if(coinMapper.selectCount(new QueryWrapper<>()) > 0){
+            coin.setValue(coinMapper.getValue());
+        }
+        else {
+            coin.setValue(0);
+        }
+        eachVOList.add(coin);
+        //处理支付宝对象
+        EachVO alipay = new EachVO();
+        alipay.setName("支付宝");
+        if(alipayMapper.selectCount(new QueryWrapper<>()) > 0){
+            alipay.setValue(alipayMapper.getValue());
+        }
+        else {
+            alipay.setValue(0);
+        }
+        eachVOList.add(alipay);
+        //处理微信对象
+        EachVO wechat = new EachVO();
+        wechat.setName("微信");
+        if(wechatMapper.selectCount(new QueryWrapper<>()) > 0){
+            wechat.setValue(wechatMapper.getValue());
+        }
+        else {
+            wechat.setValue(0);
+        }
+        eachVOList.add(wechat);
+        //处理现金对象
+        EachVO cash = new EachVO();
+        if(cashMapper.selectCount(new QueryWrapper<>()) > 0){
+            cash.setValue(cashMapper.getValue());
+        }
+        else {
+            cash.setValue(0);
+        }
+        eachVOList.add(cash);
+        return eachVOList;
     }
 
     public TotalVO tranferToTotalVO(Total total){

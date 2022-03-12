@@ -30,7 +30,7 @@ module.exports = {
     proxyTable: {},
     proxy: {
       '/api': {
-        target: 'http://localhost:9000',
+        target: 'http://localhost:10088',
         ws: true,
         changeOrigin: true,
       }

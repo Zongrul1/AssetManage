@@ -1,5 +1,6 @@
 package com.example.assetmanage.controller;
 
+import com.example.assetmanage.model.EachVO;
 import com.example.assetmanage.model.R;
 import com.example.assetmanage.model.Total;
 import com.example.assetmanage.model.TotalVO;
@@ -25,8 +26,14 @@ public class TotalController {
 
     @GetMapping("/get-all")
     @ApiOperation(value = "获取所有资产")
-    public R<List<TotalVO>> getAllStock() {
+    public R<List<TotalVO>> getAllAsset() {
         return R.successed(totalService.getAll());
+    }
+
+    @GetMapping("/get-each")
+    @ApiOperation(value = "获取各资产占比")
+    public R<List<EachVO>> getEachAsset(){
+        return R.successed(totalService.getEach());
     }
 
     @GetMapping("/test")
