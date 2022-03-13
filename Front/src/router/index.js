@@ -51,22 +51,23 @@ const routes = [
 	}
 ]
 
-// routes.beforeEach((to,from,next)=>{
-// 	if(to.meta.requireAuth){
-// 		if(store.state.userId){
-// 			next()
-// 		}else{
-// 			next({path:'/b'})
-// 		}
-// 	}else{
-// 		next()
-// 	}
-// })
-
 export default new Router({
 	routes,
 	strict: process.env.NODE_ENV !== 'production',
 })
+
+// Router.beforeEach((to,from,next) => {//判断该路由是否需要权限
+// 	   if(store.state.token){  //判断store是否有登录信息，存储在token字段
+// 			 next()
+// 	   }else{
+// 			 next({
+// 				 path:'/login',
+// 				 query:{redirect:to.fullPath}  //将该路由path传入login页面，登陆成功后跳转到该页面
+// 			  })
+// 	   }
+// 	}
+// )
+
 
 
 

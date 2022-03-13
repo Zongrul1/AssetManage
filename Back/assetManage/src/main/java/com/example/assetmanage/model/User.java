@@ -1,14 +1,17 @@
 package com.example.assetmanage.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Date;
 
 /**
  * @author 李宗儒
  * @date 2022/3/13
  **/
 @Data
+@TableName("user")
 public class User extends Base{
 
     private String name;
@@ -17,10 +20,8 @@ public class User extends Base{
 
     private String token;
 
-    private String expired;
-
     @TableField(value = "create_time")
-    private Long createTime;
+    private Date createTime;
 
 
 }
