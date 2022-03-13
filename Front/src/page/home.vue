@@ -8,17 +8,19 @@
 				<el-col :span="4"><div></div></el-col>
 			</el-row>
             <el-row :gutter="20">
-                <el-col :span="4"><div class="data_list all_head"><span class="data_num head">日期</span></div></el-col>
+                <el-col :span="4"><div class="data_list all_head"><span class="data_num head">更新日期</span></div></el-col>
                 <el-col :span="4"><div class="data_list"><span class="data_num" id="date"></span></div></el-col>
             </el-row>
 		</section>
 		<tendency :value='value' :date='date'></tendency>
+		<proportion :eachList='eachList'></proportion>
     </div>
 </template>
 
 <script>
     const axios = require('axios');
 	import tendency from '../components/tendency' 
+	import proportion from '../components/proportion' 
     export default {
 	data() {
 		return {
@@ -26,10 +28,16 @@
 			],
 			date:[
 			],
+			eachList:[
+			],
+			eachVO: {
+				value:" ",
+				name:" ",
+			},
 		}
     },
 	components: {
-    		tendency,
+    		tendency,proportion
     	},
 	created () {
 		axios.get('http://localhost:10088/total/get-all')
@@ -41,6 +49,19 @@
 			});
 			document.getElementById("value").innerHTML=response.data.data[response.data.data.length - 1].value;
 			document.getElementById("date").innerHTML=response.data.data[response.data.data.length - 1].date;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+		axios.get('http://localhost:10088/total/get-each')
+		.then((response) => {
+			var res = response.data.data;
+			res.forEach(res => {
+				this.eachVO = new Object();
+				this.eachVO.value = res.value;
+				this.eachVO.name = res.name;
+				this.eachList.push(this.eachVO);
+			});
 		})
 		.catch((error) => {
 			console.log(error);

@@ -3,7 +3,7 @@
 	  	<transition name="form-fade" mode="in-out">
 	  		<section class="form_contianer" v-show="showLogin">
 		  		<div class="manage_tip">
-		  			<p>财务管理系统</p>
+		  			<p>儒哥理财网</p>
 		  		</div>
 		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
 					<el-form-item prop="username">
@@ -42,7 +42,6 @@
 		},
 		methods: {
 			submitForm() {
-                console.log(this.loginForm.username)
                 if(this.loginForm.username == "admin" & this.loginForm.password == "admin"){
 					this.$router.push('manage')
                 }

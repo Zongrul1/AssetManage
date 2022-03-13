@@ -141,6 +141,7 @@ public class TotalService {
         eachVOList.add(wechat);
         //处理现金对象
         EachVO cash = new EachVO();
+        cash.setName("现金");
         if(cashMapper.selectCount(new QueryWrapper<>()) > 0){
             cash.setValue(cashMapper.getValue());
         }

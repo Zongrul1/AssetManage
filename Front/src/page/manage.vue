@@ -7,7 +7,8 @@
 					<el-submenu index="2">
 						<template slot="title"><i class="el-icon-document"></i>数据管理</template>
 						<el-menu-item index="stockList">股票列表</el-menu-item>
-						<el-menu-item index="fundList">基金列表</el-menu-item>
+						<el-menu-item index="wechatList">微信列表</el-menu-item>
+						<el-menu-item index="alipayList">支付宝列表</el-menu-item>
 						<el-menu-item index="coinList">数字货币列表</el-menu-item>
 						<el-menu-item index="cashList">现金列表</el-menu-item>
 					</el-submenu>

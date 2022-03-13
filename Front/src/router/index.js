@@ -7,9 +7,10 @@ const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manag
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const stockList = r => require.ensure([], () => r(require('@/page/stockList')), 'stockList');
-const fundList = r => require.ensure([], () => r(require('@/page/fundList')), 'fundList');
-const coinList = r => require.ensure([], () => r(require('@/page/coinList')), 'coinList');
 const cashList = r => require.ensure([], () => r(require('@/page/cashList')), 'cashList');
+const coinList = r => require.ensure([], () => r(require('@/page/coinList')), 'coinList');
+const wechatList = r => require.ensure([], () => r(require('@/page/wechatList')), 'wechatList');
+const alipayList = r => require.ensure([], () => r(require('@/page/alipayList')), 'alipayList');
 
 const routes = [
 	{
@@ -29,10 +30,15 @@ const routes = [
 			component: stockList,
 			meta: ['数据管理', '股票列表'],
 		},{
-			path: '/fundList',
-			component: fundList,
-			meta: ['数据管理', '基金列表'],
+			path: '/wechatList',
+			component: wechatList,
+			meta: ['数据管理', '微信'],
 		},{
+			path: '/alipayList',
+			component: alipayList,
+			meta: ['数据管理', '支付宝'],
+		},
+		{
 			path: '/coinList',
 			component: coinList,
 			meta: ['数据管理', '数字货币列表'],
@@ -40,12 +46,27 @@ const routes = [
 			path: '/cashList',
 			component: cashList,
 			meta: ['数据管理', '现金列表'],
-		},
+		}
 		]
 	}
 ]
+
+// routes.beforeEach((to,from,next)=>{
+// 	if(to.meta.requireAuth){
+// 		if(store.state.userId){
+// 			next()
+// 		}else{
+// 			next({path:'/b'})
+// 		}
+// 	}else{
+// 		next()
+// 	}
+// })
 
 export default new Router({
 	routes,
 	strict: process.env.NODE_ENV !== 'production',
 })
+
+
+
